@@ -13,8 +13,8 @@ lvim.plugins = {
 	"simrat39/rust-tools.nvim",
 	{
 		"saecki/crates.nvim",
-		tag = "v0.3.0",
-		requires = { "nvim-lua/plenary.nvim" },
+		version = "v0.3.0",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("crates").setup({
 				null_ls = {
@@ -29,6 +29,7 @@ lvim.plugins = {
 	},
 	{
 		"j-hui/fidget.nvim",
+    version = "legacy",
 		config = function()
 			require("fidget").setup()
 		end,
@@ -47,7 +48,7 @@ lvim.plugins = {
 	},
 	{
 		"catppuccin/nvim",
-		as = "catppuccin",
+		name = "catppuccin",
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -78,7 +79,7 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = function()
 			require("lsp_lines").setup()
 		end,

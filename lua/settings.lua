@@ -7,7 +7,7 @@ lvim.log.level = "warn"
 lvim.format_on_save = false
 --@usage disable automatic installation of servers
 -- lvim.lsp.installer.setup.automatic_installation = true
-lvim.lsp.diagnostics.virtual_text = false
+vim.diagnostic.config({ virtual_text = false })
 lvim.colorscheme = "catppuccin"
 vim.g.catppuccin_flavour = "macchiato"
 
