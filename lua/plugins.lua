@@ -1,21 +1,49 @@
 lvim.plugins = {
-  -- JAVA
-  -- ====================
-  "mfussenegger/nvim-jdtls",
+	-- JAVA
+	-- ====================
+	"mfussenegger/nvim-jdtls",
 
-  -- GOLANG
-  -- ====================
-  "olexsmir/gopher.nvim",
-  "leoluz/nvim-dap-go",
+	-- GOLANG
+	-- ====================
+	"olexsmir/gopher.nvim",
+	"leoluz/nvim-dap-go",
 
-  -- OTHERS
-  -- ====================
-  "p00f/nvim-ts-rainbow",
-  "jwalton512/vim-blade",
-  "tpope/vim-abolish",
+	-- RUST
+	-- ====================
+	"simrat39/rust-tools.nvim",
+	{
+		"saecki/crates.nvim",
+		tag = "v0.3.0",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("crates").setup({
+				null_ls = {
+					enabled = true,
+					name = "crates.nvim",
+				},
+				popup = {
+					border = "rounded",
+				},
+			})
+		end,
+	},
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	},
+	-- OTHERS
+	-- ====================
+	"p00f/nvim-ts-rainbow",
+	"jwalton512/vim-blade",
+	"tpope/vim-abolish",
 	{
 		"folke/trouble.nvim",
 		cmd = "TroubleToggle",
+	},
+	{
+		"sainnhe/gruvbox-material",
 	},
 	{
 		"catppuccin/nvim",

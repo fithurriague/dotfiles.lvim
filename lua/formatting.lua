@@ -15,4 +15,5 @@ formatters.setup({
 	},
 	{ command = "goimports", filetypes = { "go" } },
 	{ command = "gofumpt", filetypes = { "go" } },
+	{ command = "rustfmt", filetypes = { "rust" } },
 })

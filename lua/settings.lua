@@ -67,7 +67,7 @@ lvim.lsp.installer.setup.ensure_installed = {
   "jsonls",
 }
 
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls", "gopls" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls", "gopls", "rust_analyzer" })
 
 -- vim.tbl_map(function(server)
 --   return server ~= "jdtls"
