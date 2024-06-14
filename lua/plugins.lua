@@ -7,6 +7,45 @@ lvim.plugins = {
 	-- ====================
 	"olexsmir/gopher.nvim",
 	"leoluz/nvim-dap-go",
+	-- FLUTTER
+	-- ====================
+	{
+		"akinsho/flutter-tools.nvim",
+		-- lazy = false,
+		dependencies = {
+			"stevearc/dressing.nvim", -- optional for vim.ui.select
+		},
+		config = function()
+			require("flutter-tools").setup({
+				debugger = {
+					enabled = false,
+					run_via_dap = false,
+				},
+				outline = { auto_open = false },
+				decorations = {
+					statusline = { device = true, app_version = true },
+				},
+				widget_guides = { enabled = true, debug = true },
+				dev_log = { enabled = true, open_cmd = "10split" },
+				lsp = {
+					color = {
+						enabled = true,
+						background = true,
+						virtual_text = false,
+					},
+					settings = {
+						showTodos = true,
+						renameFilesWithClasses = "prompt",
+					},
+					on_attach = function(client, bufnr)
+						require("lvim.lsp").common_on_attach(client, bufnr)
+						local _, _ = pcall(vim.lsp.codelens.refresh)
+					end,
+					capabilities = require("lvim.lsp").common_capabilities(),
+				},
+			})
+		end,
+	},
 
 	-- RUST
 	-- ====================
@@ -27,41 +66,80 @@ lvim.plugins = {
 			})
 		end,
 	},
+	-- MARKDOWN
+	-- ====================
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
+
+	-- KITTY CONF
+	-- ====================
+	{
+		"fladson/vim-kitty",
+	},
 	{
 		"j-hui/fidget.nvim",
-    version = "legacy",
+		version = "v1.1.0",
 		config = function()
 			require("fidget").setup()
 		end,
 	},
-	-- OTHERS
+	-- COLORSCHEMES
 	-- ====================
-	"p00f/nvim-ts-rainbow",
+	"rebelot/kanagawa.nvim",
+  -- "sainnhe/gruvbox-material",
+	-- "Mofiqul/dracula.nvim",
 	"jwalton512/vim-blade",
-	"tpope/vim-abolish",
-	{
-		"folke/trouble.nvim",
-		cmd = "TroubleToggle",
-	},
-	{
-		"sainnhe/gruvbox-material",
-	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+	},
+
+	-- OTHERS
+	-- ====================
+	{
+    "tris203/precognition.nvim",
+    config = {
+      startVisible = false,
+    }
+  },
+	"HiPhish/rainbow-delimiters.nvim",
+	"tpope/vim-abolish",
+	{
+		"stevearc/oil.nvim",
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	{
+		"rachartier/tiny-devicons-auto-colors.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		event = "VeryLazy",
+		config = function()
+			-- You can add as many colors as you like. More colors is better to estimate the nearest color for each devicon.
+			local theme_colors = require("catppuccin.palettes").get_palette("macchiato")
+
+			require("tiny-devicons-auto-colors").setup({
+				colors = theme_colors,
+			})
+		end,
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {},
 	},
 	{
 		"folke/todo-comments.nvim",
 		event = "BufRead",
 		config = function()
 			require("todo-comments").setup()
-		end,
-	},
-	{
-		"phaazon/hop.nvim",
-		event = "BufRead",
-		config = function()
-			require("hop").setup()
 		end,
 	},
 	{

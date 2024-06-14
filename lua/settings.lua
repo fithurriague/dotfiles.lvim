@@ -6,9 +6,9 @@ vim.opt.relativenumber = true
 lvim.log.level = "warn"
 lvim.format_on_save = false
 --@usage disable automatic installation of servers
--- lvim.lsp.installer.setup.automatic_installation = true
+lvim.lsp.installer.setup.automatic_installation = false
 vim.diagnostic.config({ virtual_text = false })
-lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "kanagawa"
 vim.g.catppuccin_flavour = "macchiato"
 
 -- vim.opt_local.shiftwidth = 2
@@ -34,27 +34,16 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 -- TREESITTER
 -- ====================
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "go",
-  "gomod",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
+	"json",
+	"lua",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.rainbow.enable = true
-lvim.builtin.treesitter.rainbow.extended_mode = false
+lvim.builtin.treesitter.rainbow.extended_mode = true
 lvim.builtin.treesitter.highlight.enabled = true
+-- lvim.builtin.treesitter.indent.enable = true
 
 -- LSP
 -- ====================
@@ -63,8 +52,8 @@ lvim.lsp.templates_dir = join_paths(get_runtime_dir(), "after", "ftplugin")
 
 -- make sure server will always be installed even if the server is in skipped_servers list
 lvim.lsp.installer.setup.ensure_installed = {
-  "sumneko_lua",
-  "jsonls",
+	"lua_ls",
+	"jsonls",
 }
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls", "gopls", "rust_analyzer" })

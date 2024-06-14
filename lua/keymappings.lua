@@ -63,9 +63,31 @@ lvim.builtin.which_key.mappings["t"] = {
 	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
 	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 	w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+  s = { "<cmd>Trouble symbols toggle pinned=true<cr>", "Document symbols" }
 }
 
 -- HOP
 -- ====================
-lvim.builtin.which_key.mappings["j"] = { "<cmd>HopChar2<cr>", "Jump chars" }
-lvim.builtin.which_key.mappings["J"] = { "<cmd>HopWord<cr>", "Jump word" }
+-- lvim.builtin.which_key.mappings["j"] = { "<cmd>HopChar2<cr>", "Jump chars" }
+-- lvim.builtin.which_key.mappings["J"] = { "<cmd>HopWord<cr>", "Jump word" }
+
+-- PRECOGNITION
+-- ====================
+
+lvim.builtin.which_key.mappings["H"] = {
+	function()
+    require("precognition").toggle()
+	end,
+
+	"Toggle motion [H]ints"
+}
+-- OIL
+-- ====================
+lvim.builtin.which_key.mappings["e"] = {
+
+	function()
+    require("oil").toggle_float()
+	end,
+
+	"Edit parent directory"
+}
