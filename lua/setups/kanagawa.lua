@@ -19,14 +19,31 @@ require("kanagawa").setup({
 		},
 	},
 	overrides = function(colors) -- add/modify highlights
+    local palette = colors.palette;
+    local theme = colors.theme;
+
 		return {
-			RainbowDelimiterRed = { fg = colors.palette.autumnRed },
-			RainbowDelimiterYellow  = { fg = colors.palette.carpYellow },
-			RainbowDelimiterBlue = { fg = colors.palette.dragonBlue },
-			RainbowDelimiterOrange = { fg = colors.palette.surimiOrange },
-			RainbowDelimiterGreen = { fg = colors.palette.springGreen },
-			RainbowDelimiterViolet = { fg = colors.palette.oniViolet },
-			RainbowDelimiterCyan = { fg = colors.palette.waveAqua1 },
+      -- rainbow delimiters
+			RainbowDelimiterRed = { fg = palette.autumnRed },
+			RainbowDelimiterYellow  = { fg = palette.carpYellow },
+			RainbowDelimiterBlue = { fg = palette.dragonBlue },
+			RainbowDelimiterOrange = { fg = palette.surimiOrange },
+			RainbowDelimiterGreen = { fg = palette.springGreen },
+			RainbowDelimiterViolet = { fg = palette.oniViolet },
+			RainbowDelimiterCyan = { fg = palette.waveAqua1 },
+
+      -- Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
+      -- PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+      -- PmenuSbar = { bg = theme.ui.bg_m1 },
+      -- PmenuThumb = { bg = theme.ui.bg_p2 },
+
+      -- TelescopeTitle = { fg = theme.ui.special, bold = true },
+      -- TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+      -- TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+      -- TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+      -- TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+      -- TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+      -- TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
 		}
 	end,
 	theme = "wave", -- Load "wave" theme when 'background' option is not set

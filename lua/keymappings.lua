@@ -57,19 +57,9 @@ lvim.builtin.which_key.mappings["S"] = {
 -- ====================
 lvim.builtin.which_key.mappings["t"] = {
 	name = "+Trouble",
-	r = { "<cmd>Trouble lsp_references<cr>", "References" },
-	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
-  s = { "<cmd>Trouble symbols toggle pinned=true<cr>", "Document symbols" }
+  s = { "<cmd>exe 'Trouble symbols toggle win.position=left focus=true win.size=' . (winwidth(0) * 1/2)<cr>", "Document symbols" },
+  l = { "<cmd>exe 'Trouble lsp toggle win.position=left focus=true win.size=' . (winwidth(0) * 1/2)<cr>", "Lsp definitions, references, implementations, type definitions, and declarations" },
 }
-
--- HOP
--- ====================
--- lvim.builtin.which_key.mappings["j"] = { "<cmd>HopChar2<cr>", "Jump chars" }
--- lvim.builtin.which_key.mappings["J"] = { "<cmd>HopWord<cr>", "Jump word" }
 
 -- PRECOGNITION
 -- ====================
@@ -83,11 +73,8 @@ lvim.builtin.which_key.mappings["H"] = {
 }
 -- OIL
 -- ====================
-lvim.builtin.which_key.mappings["e"] = {
+vim.api.nvim_create_user_command('OilToggle', function()
+   vim.cmd((vim.bo.filetype == 'oil') and 'bd' or 'Oil')
+end, { nargs = 0 })
 
-	function()
-    require("oil").toggle_float()
-	end,
-
-	"Edit parent directory"
-}
+lvim.builtin.which_key.mappings["e"] = { "<cmd>OilToggle<cr>", "Edit parent directory" }

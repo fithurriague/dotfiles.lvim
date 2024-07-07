@@ -1,17 +1,27 @@
 lvim.plugins = {
 	-- JAVA
 	-- ====================
-	"mfussenegger/nvim-jdtls",
+	{
+		"mfussenegger/nvim-jdtls",
+		lazy = true,
+	},
 
 	-- GOLANG
 	-- ====================
-	"olexsmir/gopher.nvim",
-	"leoluz/nvim-dap-go",
+	{
+		"olexsmir/gopher.nvim",
+		lazy = true,
+	},
+	{
+		"leoluz/nvim-dap-go",
+		lazy = true,
+	},
+
 	-- FLUTTER
 	-- ====================
 	{
 		"akinsho/flutter-tools.nvim",
-		-- lazy = false,
+		lazy = true,
 		dependencies = {
 			"stevearc/dressing.nvim", -- optional for vim.ui.select
 		},
@@ -49,9 +59,13 @@ lvim.plugins = {
 
 	-- RUST
 	-- ====================
-	"simrat39/rust-tools.nvim",
+	{
+		"simrat39/rust-tools.nvim",
+		lazy = true,
+	},
 	{
 		"saecki/crates.nvim",
+		lazy = true,
 		version = "v0.3.0",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
@@ -70,6 +84,7 @@ lvim.plugins = {
 	-- ====================
 	{
 		"iamcco/markdown-preview.nvim",
+		lazy = true,
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = function()
@@ -81,6 +96,7 @@ lvim.plugins = {
 	-- ====================
 	{
 		"fladson/vim-kitty",
+		lazy = true,
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -92,27 +108,59 @@ lvim.plugins = {
 	-- COLORSCHEMES
 	-- ====================
 	"rebelot/kanagawa.nvim",
-  -- "sainnhe/gruvbox-material",
+	-- "sainnhe/gruvbox-material",
 	-- "Mofiqul/dracula.nvim",
-	"jwalton512/vim-blade",
+	{
+		"jwalton512/vim-blade",
+		event = "User FileOpened",
+	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = true,
 	},
 
 	-- OTHERS
 	-- ====================
 	{
-    "tris203/precognition.nvim",
-    config = {
-      startVisible = false,
-    }
-  },
-	"HiPhish/rainbow-delimiters.nvim",
-	"tpope/vim-abolish",
+		"mistricky/codesnap.nvim",
+		build = "make",
+		lazy = true,
+		cmd = { "CodeSnap", "CodeSnapSave" },
+	},
+	{
+		"tris203/precognition.nvim",
+		lazy = true,
+		config = {
+			startVisible = false,
+		},
+	},
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		event = "User FileOpened",
+	},
+	{
+		"tpope/vim-abolish",
+		event = "VeryLazy",
+	},
 	{
 		"stevearc/oil.nvim",
-		opts = {},
+		opts = {
+			keymaps = {
+				["gd"] = {
+					desc = "Toggle file detail view",
+					callback = function()
+						detail = not detail
+						if detail then
+							require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+						else
+							require("oil").set_columns({ "icon" })
+						end
+					end,
+				},
+			},
+		},
+		event = "VimEnter",
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
@@ -124,16 +172,31 @@ lvim.plugins = {
 		event = "VeryLazy",
 		config = function()
 			-- You can add as many colors as you like. More colors is better to estimate the nearest color for each devicon.
-			local theme_colors = require("catppuccin.palettes").get_palette("macchiato")
+			-- local palette = require("catppuccin.palettes").get_palette("macchiato")
+			local palette = require("kanagawa.colors").setup().palette
 
 			require("tiny-devicons-auto-colors").setup({
-				colors = theme_colors,
+				colors = palette,
 			})
 		end,
 	},
 	{
+		"danymat/neogen",
+		lazy = true,
+		cmd = "Neogen",
+		config = true,
+		-- Uncomment next line if you want to follow only stable versions
+		-- version = "*"
+	},
+	{
 		"folke/trouble.nvim",
-		opts = {},
+		lazy = true,
+		cmd = "Trouble",
+		opts = {
+			keys = {
+				i = "prev",
+			},
+		},
 	},
 	{
 		"folke/todo-comments.nvim",
@@ -144,6 +207,7 @@ lvim.plugins = {
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
+		lazy = true,
 		config = function()
 			require("colorizer").setup({ "css", "scss", "html", "javascript" }, {
 				RGB = true, -- #RGB hex codes
@@ -157,7 +221,32 @@ lvim.plugins = {
 		end,
 	},
 	{
+		"mistweaverco/kulala.nvim",
+		lazy = true,
+		config = function()
+			-- Setup is required, even if you don't pass any options
+			require("kulala").setup({
+				-- default_view, body or headers
+				default_view = "body",
+				-- dev, test, prod, can be anything
+				-- see: https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-8.0#environment-files
+				default_env = "dev",
+				-- enable/disable debug mode
+				debug = false,
+			})
+		end,
+	},
+	-- {
+	-- 	"rachartier/tiny-inline-diagnostic.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		vim.opt.updatetime = 100
+	-- 		require("tiny-inline-diagnostic").setup()
+	-- 	end,
+	-- },
+	{
 		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		event = "User FileOpened",
 		config = function()
 			require("lsp_lines").setup()
 		end,
